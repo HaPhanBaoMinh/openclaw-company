@@ -1,0 +1,10 @@
+.env
+backups/
+workspace/runs/*/
+workspace/inbox/*
+workspace/projects/*/artifacts/
+workspace/projects/*/logs/
+*.log
+.DS_Store
+node_modules/
+__pycache__/

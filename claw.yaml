@@ -1,0 +1,41 @@
+version: "1.0"
+
+workspace_root: "./workspace"
+run_root: "./workspace/runs"
+
+router:
+  default_agent: "boss"
+  rules:
+    - when: "intent == 'code' or has_files('src')"
+      agent: "coder"
+    - when: "intent == 'research' or contains_any(['compare', 'benchmark', 'best practice', 'RFC', 'paper'])"
+      agent: "researcher"
+    - when: "intent == 'decision' or contains_any(['prioritize', 'scope', 'tradeoff', 'plan'])"
+      agent: "boss"
+
+agents:
+  boss:
+    persona_file: "workspace/skills/boss/charter.md"
+    playbook_file: "workspace/skills/boss/playbook.md"
+    skill_packs:
+      - "workspace/skills/shared/writing.md"
+      - "workspace/skills/shared/decision_frameworks.md"
+      - "workspace/skills/shared/security.md"
+    tools_policy: "boss_policy"
+
+  coder:
+    persona_file: "workspace/skills/coder/charter.md"
+    playbook_file: "workspace/skills/coder/dev_workflow.md"
+    skill_packs:
+      - "workspace/skills/shared/engineering.md"
+      - "workspace/skills/shared/security.md"
+      - "workspace/skills/shared/writing.md"
+    tools_policy: "coder_policy"
+
+  researcher:
+    persona_file: "workspace/skills/researcher/charter.md"
+    playbook_file: "workspace/skills/researcher/research_method.md"
+    skill_packs:
+      - "workspace/skills/researcher/source_quality.md"
+      - "workspace/skills/shared/writing.md"
+    tools_policy: "researcher_policy"

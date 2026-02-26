@@ -1,0 +1,12 @@
+policies:
+  boss_policy:
+    allow: ["filesystem", "web_search", "diagrams", "issue_tracker"]
+    deny:  ["shell", "git", "packages"]
+
+  coder_policy:
+    allow: ["filesystem", "git", "shell", "packages", "diagrams"]
+    deny:  ["issue_tracker"]
+
+  researcher_policy:
+    allow: ["filesystem", "web_search", "diagrams"]
+    deny:  ["shell", "git", "packages", "issue_tracker"]

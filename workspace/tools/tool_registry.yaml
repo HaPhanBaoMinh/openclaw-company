@@ -1,0 +1,21 @@
+tools:
+  filesystem:
+    capabilities: ["read", "write", "list", "diff"]
+
+  git:
+    capabilities: ["status", "diff", "commit", "branch", "log"]
+
+  shell:
+    capabilities: ["exec"]
+
+  web_search:
+    capabilities: ["search", "open"]
+
+  diagrams:
+    capabilities: ["render_text"]
+
+  issue_tracker:
+    capabilities: ["create", "update", "comment"]
+
+  packages:
+    capabilities: ["npm", "pip", "pub", "maven"]

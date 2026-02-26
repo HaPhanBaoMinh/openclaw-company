@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: openclaw-init-workspace
+  namespace: openclaw
+spec:
+  template:
+    spec:
+      containers:
+        - name: init
+          image: baominh/openclaw-company:latest
+          command:
+            - bash
+            - -c
+            - |
+              mkdir -p /app/workspace/{inbox,backlog,projects,knowledge/{company,domain,research},skills/{shared,boss,coder,researcher},tools/templates,runs}
+              if [ ! -f /app/workspace/skills/boss/charter.md ]; then
+                cp -rn /app/workspace-init/* /app/workspace/ 2>/dev/null || true
+              fi
+              echo "Workspace initialized at $(date)"
+          volumeMounts:
+            - name: workspace-data
+              mountPath: /app/workspace
+      volumes:
+        - name: workspace-data
+          persistentVolumeClaim:
+            claimName: openclaw-workspace-pvc
+      restartPolicy: Never
+  backoffLimit: 3
